@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dongt.dao.UserDao">
+    <resultMap id="UserResult" type="User">
+        <id property="id" column="id"/>
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+        <result property="role_id" column="role_id"/>
+        <result property="role_name" column="role_name"/>
+    </resultMap>
+
+    <select id="login" parameterType="User" resultMap="UserResult">
+        select * FROM Management_User U,Mangement_Role R where U.username=#{username} and U.password=#{password} and U.role_id=R.role.id
+    </select>
+
+    <select id="findUser" parameterType="Map" resultMap="UserResult">
+        SELECT * FROM Management_User U,Mangement_Role R where U.role_id=R.role.id
+        <if test="username!=null and username!=''">
+            U.username like #{username}
+        </if>
+    </select>
+
+    <select id="getCount" parameterType="Map" resultType="Integer">
+        select count(*) from Management_User
+        <where>
+            <if test="username!=null and username!='' ">
+                username like #{username}
+            </if>
+        </where>
+    </select>
+
+    <insert id="addUser" useGeneratedKeys="true" keyProperty="id">
+        insert into Management_User(username,password,role_id)
+        values(#{username},#{password},#{role_id})
+    </insert>
+    <!-- 修改管理员 -->
+    <update id="updateUser" parameterType="User">
+        update Management_User set
+        username=#{username},password=#{password},role_id=#{role_id} where admin_id=#{id}
+    </update>
+    <!-- 删除管理员 -->
+    <delete id="deleteUser" parameterType="Integer">
+        delete from Management_User where
+        id=#{id}
+    </delete>
+</mapper>
