@@ -5,8 +5,10 @@
         <id property="id" column="id"/>
         <result property="username" column="username"/>
         <result property="password" column="password"/>
-        <result property="role_id" column="role_id"/>
-        <result property="role_name" column="role_name"/>
+        <association property="role" javaType="Management_Role">
+            <id property="role_id" column="role_id"/>
+            <result property="role_name" column="role_name"/>
+        </association>
     </resultMap>
 
     <select id="login" parameterType="User" resultMap="UserResult">

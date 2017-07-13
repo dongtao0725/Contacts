@@ -7,9 +7,15 @@ public class User {
     private Integer id;
     private String username;
     private String password;
-    private Integer role_id;
-    private String role_name;
+    private Management_Role role;
 
+    public User(){}
+    public User(Integer id,String username,String password,Management_Role role){
+        this.id=id;
+        this.username=username;
+        this.password=password;
+        this.role=role;
+    }
     public Integer getId() {
         return id;
     }
@@ -34,25 +40,17 @@ public class User {
         this.password = password;
     }
 
-    public Integer getRole_id() {
-        return role_id;
+    public Management_Role getRole() {
+        return role;
     }
 
-    public void setRole_id(Integer role_id) {
-        this.role_id = role_id;
-    }
-
-    public String getRole_name() {
-        return role_name;
-    }
-
-    public void setRole_name(String role_name) {
-        this.role_name = role_name;
+    public void setRole(Management_Role role) {
+        this.role = role;
     }
 
     @Override
     public String toString() {
         return "Admin:[id=" + id + ",username=" + username + ",password="
-                + password + ",role_name=" + role_name + "]";
+                + password + ",role_name=" + role.getRole_name() + "]";
     }
 }

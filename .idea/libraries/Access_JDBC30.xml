@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Access_JDBC30">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/src/main/webapp/WEB-INF/lib/Access_JDBC30.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
