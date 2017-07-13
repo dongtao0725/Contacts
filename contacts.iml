@@ -15,6 +15,7 @@
       <configuration>
         <fileset id="fileset" name="Spring Application Context" removed="false">
           <file>file://$MODULE_DIR$/src/main/resources/spring-mybatis.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/spring-mvc.xml</file>
         </fileset>
       </configuration>
     </facet>
@@ -30,7 +31,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Access_JDBC30" level="project" />
-    <orderEntry type="library" name="commons-dbcp2-2.1.1" level="project" />
     <orderEntry type="library" name="Maven: junit:junit:4.12" level="project" />
     <orderEntry type="library" name="Maven: org.hamcrest:hamcrest-core:1.3" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-webmvc:4.3.9.RELEASE" level="project" />
@@ -49,6 +49,7 @@
     <orderEntry type="library" name="Maven: mysql:mysql-connector-java:6.0.6" level="project" />
     <orderEntry type="library" name="Maven: log4j:log4j:1.2.17" level="project" />
     <orderEntry type="library" name="Maven: javax.servlet:jstl:1.2" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.commons:commons-pool2:2.4.2" level="project" />
+    <orderEntry type="library" name="servlet-api" level="application" />
+    <orderEntry type="library" name="jsp-api" level="application" />
   </component>
 </module>

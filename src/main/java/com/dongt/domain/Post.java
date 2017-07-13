@@ -54,6 +54,6 @@ public class Post {
 
     public String toString() {
         return "Post:[id=" + id + ",title=" + title + ",content=" + content
-                + ",admin=" + user + ",date=" + date + "]";
+                + ",user=" + user.getUsername() + ",date=" + date + "]";
     }
 }

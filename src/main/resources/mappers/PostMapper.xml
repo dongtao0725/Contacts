@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dongt.dao.PostDao">
+    <resultMap id="PostResult" type="Post">
+        <id property="id" column="post_id"/>
+        <result property="title" column="title"/>
+        <result property="content" column="content"/>
+        <result property="date" column="create_date"/>
+        <association property="user" javaType="User">
+            <id property="id" column="id"/>
+            <result property="username" column="username"/>
+        </association>
+    </resultMap>
+
+    <select id="getPost" parameterType="Map" resultMap="PostResult">
+        SELECT * FROM POST P,Management_User U where P.user_id=U.id
+        <if test="title!=null and title!='' ">
+            and p.title like #{title}
+        </if>
+    </select>
+
+    <select id="getCount" resultType="int">
+        select count(*) from POST
+        <where>
+            <if test="title!=null and title!='' ">
+                title like #{title}
+            </if>
+        </where>
+    </select>
+
+    <insert id="addPost" useGeneratedKeys="true" keyProperty="post_id">
+        insert
+        into POST(title,content,user_id,create_date)
+        values(#{title},#{content},#{user.id},#{date})
+    </insert>
+    <!-- 修改公告 -->
+    <update id="updatePost" parameterType="Post">
+        update POST set
+        title=#{title},content=#{content},user_id=#{user.id},create_date=#{date}
+        where post_id=#{id}
+    </update>
+    <!-- 删除公告 -->
+    <delete id="deletePost" parameterType="Integer">
+        delete from POST
+        where
+        post_id=#{id}
+    </delete>
+    <!-- 根据 ID 查询公告信息 -->
+    <select id="getPostById" parameterType="Integer" resultMap="PostResult">
+        select * from Management_USER U,POST P where P.user_id = U.id and
+        P.post_id=#{id}
+    </select>
+</mapper>

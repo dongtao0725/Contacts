@@ -12,11 +12,11 @@
     </resultMap>
 
     <select id="login" parameterType="User" resultMap="UserResult">
-        select * FROM Management_User U,Mangement_Role R where U.username=#{username} and U.password=#{password} and U.role_id=R.role.id
+        select * FROM Management_User U,Management_Role R where U.username=#{username} and U.password=#{password} and U.role_id=R.role_id
     </select>
 
     <select id="findUser" parameterType="Map" resultMap="UserResult">
-        SELECT * FROM Management_User U,Mangement_Role R where U.role_id=R.role.id
+        SELECT * FROM Management_User U,Management_Role R where U.role_id=R.role_id
         <if test="username!=null and username!=''">
             U.username like #{username}
         </if>
