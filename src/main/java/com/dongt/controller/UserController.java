@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by dongt on 2017/7/13.
@@ -37,5 +40,25 @@ public class UserController {
     @RequestMapping(value="/main")
     public String test(Model model) throws Exception{
         return "dashboard";
+    }
+
+    @RequestMapping("/logout")
+    public String logout(HttpSession session) throws Exception{
+        session.invalidate();
+        return "redirect:/login.jsp";
+    }
+
+    @RequestMapping("/userlist")
+    public String userlist(HttpServletRequest request) throws  Exception{
+        Map<String,Object> map = new HashMap<String, Object>();
+        List<User> userlist = userService.findUsers(map);
+        request.setAttribute("userlist",userlist);
+        return "WEB-INF/views/userlist";
+    }
+
+    @RequestMapping("/adduser")
+    public String adduser(User user)throws Exception{
+        userService.addUser(user);
+        return "redirect:userlist";
     }
 }

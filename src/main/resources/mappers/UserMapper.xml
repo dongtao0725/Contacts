@@ -15,10 +15,10 @@
         select * FROM Management_User U,Management_Role R where U.username=#{username} and U.password=#{password} and U.role_id=R.role_id
     </select>
 
-    <select id="findUser" parameterType="Map" resultMap="UserResult">
+    <select id="findUsers" parameterType="Map" resultMap="UserResult">
         SELECT * FROM Management_User U,Management_Role R where U.role_id=R.role_id
         <if test="username!=null and username!=''">
-            U.username like #{username}
+            and U.username like #{username}
         </if>
     </select>
 
@@ -31,14 +31,14 @@
         </where>
     </select>
 
-    <insert id="addUser" useGeneratedKeys="true" keyProperty="id">
+    <insert id="addUser" useGeneratedKeys="true" keyProperty="id" parameterType="User">
         insert into Management_User(username,password,role_id)
-        values(#{username},#{password},#{role_id})
+        values(#{username},#{password},#{role.role_id})
     </insert>
     <!-- 修改管理员 -->
     <update id="updateUser" parameterType="User">
         update Management_User set
-        username=#{username},password=#{password},role_id=#{role_id} where admin_id=#{id}
+        username=#{username},password=#{password},role_id=#{role.role_id} where id=#{id}
     </update>
     <!-- 删除管理员 -->
     <delete id="deleteUser" parameterType="Integer">

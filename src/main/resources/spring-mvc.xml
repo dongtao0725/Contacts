@@ -13,7 +13,7 @@
     <context:component-scan base-package="com.dongt.controller" />
     <!-- 设置默认配置方案 -->
     <mvc:annotation-driven />
-
+    <mvc:resources location="/" mapping="/**" />
     <!-- 视图解析器 -->
     <bean id="viewResolver"
           class="org.springframework.web.servlet.view.InternalResourceViewResolver">

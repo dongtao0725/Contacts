@@ -1,0 +1,132 @@
+body {
+    font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 0.9rem;
+    font-weight: 300;
+    line-height: 1.5;
+    color: #cfd2da;
+    background-color: #252830;
+    padding-top: 5px;
+}
+a{ text-decoration: none;}
+a:hover{ text-decoration: none;}
+h1, h2, h3,  .a, .b, .c, .d, .e, .f {
+    margin-bottom: 0.5rem;
+    font-family: inherit;
+    font-weight: 300;
+    line-height: 1.1;
+    color: white;
+}
+
+.search{
+    position: relative;
+    margin-bottom: 30px;
+}
+.search .po {
+    position: absolute;
+    top: 1px;
+    right: 0;
+    padding: 9px 10px;
+    color: #b7bcc8;
+    border: 0;
+    line-height: 0;
+    background: transparent;
+}
+.search .form-control {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.search .form-control {
+    display: block;
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.9rem;
+    line-height: 1.25;
+    color: #fff;
+    background-color: #434857;
+    background-image: none;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 0.25rem;
+    -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+    transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+}
+.litle_title {
+    margin-top: 0;
+    margin-bottom: 5px;
+    font-weight: normal;
+    font-size: 85%;
+    color: #434857;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+.title{
+    float: left;
+}
+.dept_list {
+    float: right;
+    margin-top: 12px;
+    margin-left: 0;
+}
+.qb {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+}
+.header{
+    margin-top: 3rem;
+}
+.btn-login{
+    background: transparent;
+    color: #0275d8;
+    text-align: center;
+    float: right;
+}
+.btn-dept{
+    width: 100px;
+    background-color: #434857;
+    color: #fff;
+}
+.tools{
+    width: 100%;
+    padding-bottom: 15px;
+}
+.btn-add{
+    background: transparent;
+    color: #0275d8;
+    width: 33px;
+    height: 33px;
+    text-align: center;
+    padding: 0;
+}
+.content{
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+}
+table {
+    display: table;
+    border-collapse: separate;
+    border-spacing: 0px;
+    border-color: grey;
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 20px;
+}
+.contentlist thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #434857;
+}
+.contentlist th, .contentlist td {
+    padding: 0.75rem;
+    vertical-align: top;
+    border-top: 1px solid #434857;
+}
+.btn-operator{
+    background: transparent;
+    text-align: center;
+    color: #0275d8;
+}
