@@ -6,6 +6,7 @@ package com.dongt.domain;
 public class Management_Role {
     private Integer role_id;
     private String role_name;
+    private String description;
 
     public Integer getRole_id() {
         return role_id;
@@ -21,5 +22,13 @@ public class Management_Role {
 
     public void setRole_name(String role_name) {
         this.role_name = role_name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

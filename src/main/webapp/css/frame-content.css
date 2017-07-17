@@ -51,6 +51,10 @@ h1, h2, h3,  .a, .b, .c, .d, .e, .f {
     -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
     transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 }
+.search .form-control:focus{
+    background-color: #fff;
+    color:#434857 ;
+}
 .litle_title {
     margin-top: 0;
     margin-bottom: 5px;

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dongt.dao.M_RoleDao">
+    <resultMap id="M_RoleResult" type="Management_Role">
+        <id property="role_id" column="role_id"/>
+        <result property="role_name" column="role_name"/>
+        <result property="description" column="description"/>
+    </resultMap>
+
+    <select id="getAllM_Role" resultMap="M_RoleResult">
+        SELECT * FROM Management_Role;
+    </select>
+
+    <select id="getM_RoleById"  parameterType="Integer"  resultMap="M_RoleResult">
+        SELECT * FROM Management_Role WHERE role_id=#{id}
+    </select>
+</mapper>

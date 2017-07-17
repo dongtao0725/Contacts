@@ -12,11 +12,11 @@
     </resultMap>
 
     <select id="login" parameterType="User" resultMap="UserResult">
-        select * FROM Management_User U,Management_Role R where U.username=#{username} and U.password=#{password} and U.role_id=R.role_id
+        select U.id,U.username,U.password,R.role_id,R.role_name FROM Management_User U,Management_Role R where U.username=#{username} and U.password=#{password} and U.role_id=R.role_id
     </select>
 
     <select id="findUsers" parameterType="Map" resultMap="UserResult">
-        SELECT * FROM Management_User U,Management_Role R where U.role_id=R.role_id
+        SELECT  U.id,U.username,U.password,R.role_id,R.role_name FROM Management_User U,Management_Role R where U.role_id=R.role_id
         <if test="username!=null and username!=''">
             and U.username like #{username}
         </if>
@@ -35,11 +35,20 @@
         insert into Management_User(username,password,role_id)
         values(#{username},#{password},#{role.role_id})
     </insert>
+
     <!-- 修改管理员 -->
     <update id="updateUser" parameterType="User">
         update Management_User set
-        username=#{username},password=#{password},role_id=#{role.role_id} where id=#{id}
+        <choose>
+            <when test="password!=null and password!=''">
+              username=#{username},password=#{password},role_id=#{role.role_id} where id=#{id}
+            </when>
+            <otherwise>
+                username=#{username},role_id=#{role.role_id} where id=#{id}
+            </otherwise>
+        </choose>
     </update>
+
     <!-- 删除管理员 -->
     <delete id="deleteUser" parameterType="Integer">
         delete from Management_User where
