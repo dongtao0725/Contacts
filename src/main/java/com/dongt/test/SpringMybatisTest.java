@@ -37,7 +37,7 @@ public class SpringMybatisTest {
 
         //map.put("level",2);
        // map.put("role",1);
-        map.put("dept_id",1);
+        map.put("parent_id",22);
         System.out.println(departmentService.getDepartmentByMap(map));
     }
 }

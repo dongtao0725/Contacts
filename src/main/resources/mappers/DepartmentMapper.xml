@@ -19,6 +19,9 @@
             <if test="dept_id!=null and dept_id!='' ">
                     and dept_id=#{dept_id}
             </if>
+            <if test="parent_id!=null and parent_id!='' ">
+                and parent_id=#{parent_id}
+            </if>
             <if test="level!=null and level!='' ">
                 <choose>
                     <when test="level==1">
