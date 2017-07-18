@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dongt.dao.DepartmentDao">
+    <resultMap id="DepartmentResult" type="Department">
+        <id property="dept_id" column="dept_id"/>
+        <result property="dept_name" column="dept_name"/>
+        <result property="dept_description" column="dept_description"/>
+        <result property="parent_id" column="parent_id"/>
+        <result property="contacts" column="contacts"/>
+        <result property="role" column="role"/>
+    </resultMap>
+
+    <select id="getAllDepartment" resultMap="DepartmentResult">
+        SELECT * FROM Department
+    </select>
+
+    <select id="getDepartmentByMap" parameterType="map" resultMap="DepartmentResult">
+        SELECT * FROM Department where 1=1
+            <if test="dept_id!=null and dept_id!='' ">
+                    and dept_id=#{dept_id}
+            </if>
+            <if test="level!=null and level!='' ">
+                <choose>
+                    <when test="level==1">
+                       and parent_id=0
+                    </when>
+                    <when test="level==2">
+                        and parent_id!=0 and parent_id in (SELECT dept_id FROM Department where parent_id=0 )
+                    </when>
+                    <when test="level==3">
+                        and parent_id!=0 and parent_id  not in (SELECT dept_id FROM Department where parent_id=0 )
+                    </when>
+                </choose>
+            </if>
+            <if test="contacts==1">
+            and contacts=1
+            </if>
+            <if test="role==1 ">
+                and role=1
+            </if>
+    </select>
+
+    <insert id="addDepartment"  useGeneratedKeys="true" keyProperty="id" parameterType="Department">
+        INSERT INTO Department (dept_name,dept_description,contacts,role,parent_id) VALUES (
+        #{dept_name},#{dept_description},#{contaces},#{role},#{parent_id})
+    </insert>
+
+    <delete id="deleteDepartment" parameterType="Integer">
+        DELETE FROM Department WHERE dept_id=#{dept_id}
+    </delete>
+
+    <update id="updateDepartment" parameterType="Department">
+        UPDATE Department SET dept_name=#{dept_name},dept_description=#{dept_description},parent_id=#{parent_id},contacts=#{contacts},role=#{role}
+        WHERE dept_id=#{dept_id}
+    </update>
+</mapper>

@@ -1,6 +1,7 @@
 package com.dongt.test;
 
 import com.dongt.domain.User;
+import com.dongt.service.DepartmentService;
 import com.dongt.service.PostService;
 import com.dongt.service.UserService;
 import org.junit.Test;
@@ -23,15 +24,21 @@ public class SpringMybatisTest {
     private UserService userService;
     @Autowired
     private PostService postService;
+    @Autowired
+    private DepartmentService departmentService;
     @Test
     public void testLogin() {
         User user = new User();
         Map<String,Object> map = new HashMap<String, Object>();
         user.setUsername("superadmin");
         user.setPassword("admin");
-        System.out.println(userService.login(user).toString());
-        System.out.println(postService.getPost(map).toString());
+        //System.out.println(userService.login(user).toString());
+        //System.out.println(postService.getPost(map).toString());
 
+        //map.put("level",2);
+       // map.put("role",1);
+        map.put("dept_id",1);
+        System.out.println(departmentService.getDepartmentByMap(map));
     }
 }
 
