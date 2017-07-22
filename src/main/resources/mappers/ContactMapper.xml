@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dongt.dao.ContactDao">
+    <resultMap id="ContactResult" type="Contact">
+        <id property="c_id" column="c_id"/>
+        <result property="department" column="department"/>
+        <result property="position" column="position"/>
+        <result property="name" column="name"/>
+        <result property="c_phone" column="c_phone"/>
+        <result property="o_phone" column="o_phone"/>
+        <result property="network" column="network"/>
+        <result property="enterprise" column="enterprise"/>
+        <association property="dept" javaType="Department">
+            <id property="dept_id" column="dept_id"/>
+            <result property="dept_name" column="dept_name"/>
+        </association>
+    </resultMap>
+
+    <select id="getContactsByDeptID" parameterType="Integer" resultMap="ContactResult">
+        SELECT c_id,department.dept_id,department.dept_name,department,position,name,c_phone,o_phone,network,enterprise FROM contacts,department where contacts.dept_id=department.dept_id and dept_id=#{dept_id}
+    </select>
+
+    <select id="getContactsByID" parameterType="Integer" resultMap="ContactResult">
+        SELECT c_id,department.dept_id,department.dept_name,department,position,name,c_phone,o_phone,network,enterprise FROM  contacts,department where contacts.dept_id=department.dept_id and c_id=#{c_id}
+    </select>
+
+    <insert id="addContact" parameterType="Contact" useGeneratedKeys="true" keyProperty="c_id">
+        INSERT INTO contacts (dept_id,department,position,name,c_phone,o_phone,network,enterprise) VALUES (#{dept.dept_id},#{department},#{position},#{name},#{c_phone},#{o_phone},#{network},#{enterprise})
+    </insert>
+
+    <update id="updateContact" parameterType="Contact">
+        UPDATE contacts SET (dept_id,department,position,name,c_phone,o_phone,network,enterprise) = (#{dept.dept_id},#{department},#{position},#{name},#{c_phone},#{o_phone},#{network},#{enterprise}) WHERE c_id=#{c_id}
+    </update>
+
+    <delete id="deleteContact" parameterType="Integer">
+        DELETE FROM contacts where c_id=#{c_id}
+    </delete>
+</mapper>

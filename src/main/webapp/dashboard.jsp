@@ -41,7 +41,9 @@
             line-height: 1.1;
             color: white;
         }
-
+        .container{
+            width: 85%;
+        }
         .search{
             position: relative;
             margin-bottom: 30px;
@@ -147,27 +149,32 @@
             vertical-align: top;
             border-top: 1px solid #434857;
         }
+        i{
+            margin-right: 10px;
+        }
     </style>
     <script>
-        $(document).ready(function() {
+        $(function(){
             $(".qn").click(function () {
                 $(".qn").removeClass("active");
                 $(this).addClass("active");
             });
-
-            $("#iframe-content").load(function(){
+            function onloadiframe(){
                 alert("1");
-                var mainheight = $(this).contents().find("body").height()+30;
-                alert(mainheight);
-                $(this).height(mainheight);
-            });
+                this.height(this.content().find("body").height()+20);
+            };
         });
+
+        //function onloadiframe(){
+        //    alert(this.Document.body.offsetHeight);
+        //    this.height(this.Document.body.scrollHeight+20);
+       // };
     </script>
 </head>
 <body>
 <div class="container">
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-xl-3" style="max-width:300px;">
             <nav style="margin-right: 40px; padding-top: 20px;">
                 <div class="login" style="padding-bottom: 20px;">
                     <img src="" width="50rem" height="50rem" style="float: left"/>
@@ -184,31 +191,31 @@
                     <ul class="nav qq nav-stacked xx">
                         <li class="ayx">Dashboards</li>
                         <li class="qp">
-                            <a class="qn active" href="#">通讯录</a>
+                            <a class="qn active" href="${pageContext.request.contextPath}/contact/dept_id" target="frame-content"><i class="fa fa-address-book fa-lg" aria-hidden="true"></i>通讯录</a>
                         </li>
                         <li class="qp">
-                            <a class="qn" href="#">派单规则</a>
+                            <a class="qn" href="#"><i class="fa fa-share-square-o fa-lg" aria-hidden="true"></i>派单规则</a>
                         </li>
                         <li class="qp">
-                            <a class="qn " href="#">密码表</a>
+                            <a class="qn " href="#"><i class="fa fa-key fa-lg" aria-hidden="true"></i> 密码表</a>
                         </li>
 
                         <li class="ayx" style="margin-top: 20px;">Management</li>
                         <li class="qp">
-                            <a class="qn " href="#">用户管理</a>
+                            <a class="qn " href="/user/userlist" target="frame-content"><i class="fa fa-users fa-lg" aria-hidden="true"></i>用户管理</a>
                         </li>
                         <li class="qp">
-                            <a class="qn" href="/tag" target="blank">标签管理</a>
+                            <a class="qn" href="/tag" target="blank"><i class="fa fa-tags fa-lg" aria-hidden="true"></i>标签管理</a>
                         </li>
                         <li class="qp">
-                            <a class="qn " href="/post">公告管理</a>
+                            <a class="qn " href="/post"><i class="fa fa-bell fa-lg" aria-hidden="true"></i>公告管理</a>
                         </li>
                     </ul>
                     <hr>
                 </div>
             </nav>
         </div>
-        <div class="col-md-9">
+        <div class="col-xl-9">
             <div class="toplogin">
                 <c:choose>
                     <c:when test="${!empty currentUser }">
@@ -232,7 +239,7 @@
                 </c:choose>
                 <div class="clearfix"></div>
             </div>
-            <iframe class="embed-responsive-item" name="frame-content" id="iframe-content" src="/user/userlist" width="100%"  frameborder="0" scrolling="no" style="min-height: 1000px; overflow: visible"></iframe>
+            <iframe name="frame-content" id="frame-content" src="${pageContext.request.contextPath}/contact/dept_id/" width="100%"  height="" frameborder="0" scrolling="no" style="min-height: 1000px;" onload="onloadiframe()"></iframe>
         </div>
     </div>
 </div>

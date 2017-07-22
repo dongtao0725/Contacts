@@ -6,6 +6,8 @@ import com.dongt.service.DepartmentService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
 
@@ -18,7 +20,11 @@ public class DepartmentServiceImpl implements DepartmentService {
     private DepartmentDao departmentDao;
 
     public List<Department> getAllDepartment(){
-        return departmentDao.getAllDepartment();
+        //return departmentDao.getAllDepartment();
+        Map<String,Object> map = new HashMap<String, Object>();
+        map.put("level",1);
+        List<Department> departmentList=departmentDao.getDepartmentByMap(map);
+        return TreeDepartmentList(departmentList);
     }
 
     public List<Department> getDepartmentByMap(Map<String,Object> map){
@@ -34,5 +40,19 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
     public void deleteDepartment(Integer dept_id){
         departmentDao.deleteDepartment(dept_id);
+    }
+
+
+    public List<Department> TreeDepartmentList(List<Department> departmentList) {
+        List<Department> childDepartmentList = new ArrayList<Department>();
+        for (Department department : departmentList) {
+            int dept_id = department.getDept_id();
+            childDepartmentList.add(department);
+            Map<String,Object> map = new HashMap<String, Object>();
+            map.put("parent_id",dept_id);
+            List<Department> c_node=departmentDao.getDepartmentByMap(map);
+            childDepartmentList.addAll(TreeDepartmentList(c_node));
+        }
+        return  childDepartmentList;
     }
 }
