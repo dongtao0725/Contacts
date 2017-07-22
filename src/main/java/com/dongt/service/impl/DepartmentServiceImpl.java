@@ -27,6 +27,10 @@ public class DepartmentServiceImpl implements DepartmentService {
         return TreeDepartmentList(departmentList);
     }
 
+    public Department getDepartmentByDept_id(Integer dept_id){
+        return departmentDao.getDepartmentByDept_id(dept_id);
+    }
+
     public List<Department> getDepartmentByMap(Map<String,Object> map){
         return departmentDao.getDepartmentByMap(map);
     }

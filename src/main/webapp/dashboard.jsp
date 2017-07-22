@@ -159,12 +159,16 @@
                 $(".qn").removeClass("active");
                 $(this).addClass("active");
             });
-            function onloadiframe(){
-                alert("1");
-                this.height(this.content().find("body").height()+20);
-            };
+
         });
 
+        function onloadiframe(){
+            var iframe = document.getElementById("frame-content");
+            var bHeight = iframe.contentWindow.document.body.scrollHeight;
+            var dHeight = iframe.contentWindow.document.documentElement.scrollHeight;
+            var height = Math.max(bHeight, dHeight);
+            iframe.height = height;
+        };
         //function onloadiframe(){
         //    alert(this.Document.body.offsetHeight);
         //    this.height(this.Document.body.scrollHeight+20);
@@ -239,10 +243,9 @@
                 </c:choose>
                 <div class="clearfix"></div>
             </div>
-            <iframe name="frame-content" id="frame-content" src="${pageContext.request.contextPath}/contact/dept_id/" width="100%"  height="" frameborder="0" scrolling="no" style="min-height: 1000px;" onload="onloadiframe()"></iframe>
+            <iframe name="frame-content" id="frame-content" src="${pageContext.request.contextPath}/contact/dept_id/" width="100%"  height="" frameborder="0" scrolling="no" style="min-height: 1000px;" onload="onloadiframe()" onchange="onloadiframe()"></iframe>
         </div>
     </div>
 </div>
-
 
 </body>

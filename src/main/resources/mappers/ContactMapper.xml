@@ -17,11 +17,11 @@
     </resultMap>
 
     <select id="getContactsByDeptID" parameterType="Integer" resultMap="ContactResult">
-        SELECT c_id,department.dept_id,department.dept_name,department,position,name,c_phone,o_phone,network,enterprise FROM contacts,department where contacts.dept_id=department.dept_id and dept_id=#{dept_id}
+        SELECT c_id,department.dept_id,department.dept_name,department,position,name,c_phone,o_phone,network,enterprise FROM contacts,department where contacts.dept_id=department.dept_id and dept_id=#{dept_id} ORDER BY department
     </select>
 
-    <select id="getContactsByID" parameterType="Integer" resultMap="ContactResult">
-        SELECT c_id,department.dept_id,department.dept_name,department,position,name,c_phone,o_phone,network,enterprise FROM  contacts,department where contacts.dept_id=department.dept_id and c_id=#{c_id}
+    <select id="getContactsByName" parameterType="String" resultMap="ContactResult">
+        SELECT c_id,department.dept_id,department.dept_name,department,position,name,c_phone,o_phone,network,enterprise FROM  contacts,department where contacts.dept_id=department.dept_id and name like #{name} ORDER BY department
     </select>
 
     <insert id="addContact" parameterType="Contact" useGeneratedKeys="true" keyProperty="c_id">

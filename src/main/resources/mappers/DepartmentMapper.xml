@@ -14,6 +14,10 @@
         SELECT * FROM Department
     </select>
 
+    <select id="getDepartmentByDept_id" parameterType="Integer" resultMap="DepartmentResult">
+        SELECT * FROM Department where dept_id=#{dept_id}
+    </select>
+
     <select id="getDepartmentByMap" parameterType="map" resultMap="DepartmentResult">
         SELECT * FROM Department where 1=1
             <if test="dept_id!=null and dept_id!='' ">

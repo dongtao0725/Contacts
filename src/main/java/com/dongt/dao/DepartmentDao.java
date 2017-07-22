@@ -13,6 +13,7 @@ import java.util.Map;
 public interface DepartmentDao {
     public List<Department> getAllDepartment();
     public List<Department> getDepartmentByMap(Map<String,Object> map);
+    public Department getDepartmentByDept_id(Integer dept_id);
     public void addDepartment(Department department);
     public void updateDepartment(Department department);
     public void deleteDepartment(Integer dept_id);

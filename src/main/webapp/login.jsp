@@ -14,6 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>省NOC通讯管理平台</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
     <script src="${pageContext.request.contextPath}/js/jquery-3.2.1.min.js" ></script>
     <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
@@ -45,12 +46,11 @@
             width: 1.5rem ;
             height: 1.5rem;
             border-radius: 1.5rem;
-            background:#252830;
+            color: #fff;
             text-align: center;
             white-space: nowrap;
             vertical-align: middle;
             line-height: 1.5rem;
-            color: #464a4c ;
             margin-top: -0.2rem;
             padding-left: 0.2rem;
             font-size: 1.5rem;
@@ -58,13 +58,9 @@
         }
         .loginbtn:hover{
             text-decoration:none;
-            color: #464a4c ;
-            background-color: #fff;
         }
         .loginbtn:visited{
             text-decoration:none;
-            color: #464a4c ;
-            background-color: #fff;
         }
     </style>
     <script>
@@ -108,7 +104,7 @@
             <form id=adminlogin method=post name=adminlogin action="${pageContext.request.contextPath}/user/login">
                 <div class="form-group">
                     <label for="username">Username</label>
-                    <a class="loginbtn" href="#" id="submit">></a>
+                    <a class="loginbtn" href="#" id="submit"><i class="fa fa-sign-in" aria-hidden="true"></i></a>
                     <div class="clearfix"></div>
                     <input type="text" class="form-control" id="username" name="username" value="${user.username}" placeholder="Username">
                 </div>

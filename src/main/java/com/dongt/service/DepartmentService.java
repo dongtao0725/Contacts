@@ -10,6 +10,7 @@ import java.util.List;
  */
 public interface DepartmentService {
     public List<Department> getAllDepartment();
+    public Department getDepartmentByDept_id(Integer dept_id);
     public List<Department> getDepartmentByMap(Map<String,Object> map);
     public void addDepartment(Department department);
     public void updateDepartment(Department department);

@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fun" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -62,7 +63,10 @@
                 }
                 $("#modal-form").submit();
             })
-
+            $(".nav-link").click(function () {
+                $(".nav-link").removeClass("active");
+                $(this).addClass("active");
+            });
         })
 
         function delcfm(url) {
@@ -87,6 +91,8 @@
             $('#myModal').modal({backdrop:false});
             $('#myModal').modal('show');
         }
+
+
     </script>
 </head>
 <body>
@@ -98,10 +104,10 @@
     <div class="dept_list">
         <div class="dropdown open">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fa fa-paper-plane" aria-hidden="true" style="margin-right: 10px;"></i>${contactslist[0].dept.dept_name}
+                <i class="fa fa-paper-plane" aria-hidden="true" style="margin-right: 10px;"></i>${company.dept_name}
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenu1" style="">
-                <c:forEach var="dept" items="${deptlist}"  varStatus="status">
+                <c:forEach var="dept" items="${deptList}"  varStatus="status">
                     <a class="dropdown-item" style="float: left" href="${pageContext.request.contextPath}/contact/dept_id?dept_id=${dept.dept_id}">${dept.dept_name}</a>
                     <c:if test="${status.count/5==0}">
                         <div class="clearfix"></div>
@@ -114,20 +120,39 @@
 </div>
 <div class="tools">
     <div style="width: 99%;display: table-cell;">
-        <form class="search" style="display: inline-block;margin-bottom: 0px;" action="${pageContext.request.contextPath}/user/userlist">
-            <input class="form-control" type="text" name="username" placeholder="Username Search...">
+        <form class="search" style="display: inline-block;margin-bottom: 0px;" action="${pageContext.request.contextPath}/contact/search">
+            <input class="form-control" type="text" name="name" placeholder="Search Name...">
             <button type="submit" class="po">
                 <i class="fa fa-search" aria-hidden="true"></i>
             </button>
         </form>
     </div>
-    <div style="width:1%;display: table-cell;">
+    <%--<div style="width:1%;display: table-cell;">
         <button type="button" class="btn btn-primary btn-add" >
             <i class="fa fa-plus-circle" aria-hidden="true"></i>
         </button>
-    </div>
+    </div>--%>
 </div>
 <div class="content">
+    <c:if test="${secondaryDeptList!=null && fun:length(secondaryDeptList) > 0}">
+    <ul class="nav nav-tabs" style="margin-bottom: 15px;">
+        <c:forEach var="secondaryDept" items="#{secondaryDeptList}" varStatus="i">
+        <li class="nav-item">
+            <c:choose>
+                <c:when test="${secondaryDept.dept_id==param.secondaryDept_id}">
+                    <a href="#" class="nav-link active">${secondaryDept.dept_name}</a>
+                </c:when>
+                <c:when test="${param.secondaryDept_id==null && i.count==1}">
+                    <a href="#" class="nav-link active">${secondaryDept.dept_name}</a>
+                </c:when>
+                <c:otherwise>
+                    <a href="/contact/dept_id?dept_id=${company.dept_id}&secondaryDept_id=${secondaryDept.dept_id}" class="nav-link">${secondaryDept.dept_name}</a>
+                </c:otherwise>
+            </c:choose>
+        </li>
+        </c:forEach>
+    </ul>
+    </c:if>
     <table class="table contentlist table-hover">
         <thead>
         <tr>
@@ -142,7 +167,7 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach var="contact" items="${contactslist}" varStatus="status">
+        <c:forEach var="contact" items="${contactsList}" varStatus="status">
             <tr>
                 <td>${contact.dept.dept_name}</td>
                 <td>${contact.department}</td>

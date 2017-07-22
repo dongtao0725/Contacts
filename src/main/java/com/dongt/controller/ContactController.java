@@ -1,5 +1,7 @@
 package com.dongt.controller;
 
+import com.dongt.domain.Contact;
+import com.dongt.domain.Department;
 import com.dongt.service.ContactService;
 import com.dongt.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,10 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 @Controller
 @RequestMapping("/contact")
@@ -22,14 +21,40 @@ public class ContactController {
     private DepartmentService departmentService;
 
     @RequestMapping("/dept_id")
-    public String getContactsByDeptID(Integer dept_id, HttpServletRequest request){
+    public String getContactsByDeptID(Integer dept_id,Integer secondaryDept_id, HttpServletRequest request){
+        Integer company_id = dept_id;
+        List<Department> secondaryDeptList = new ArrayList<Department>();
+        Map<String,Object> map = new HashMap<String, Object>();
+
         if(dept_id==null ||  dept_id<=0){
             dept_id=1;
+            company_id = dept_id;
+        }else{
+            Map<String,Object> map1 = new HashMap<String, Object>();
+            map1.put("parent_id",dept_id);
+            map1.put("contacts",1);
+            secondaryDeptList = departmentService.getDepartmentByMap(map1);
+            if(null != secondaryDeptList && secondaryDeptList.size() > 0){
+                if(secondaryDept_id==null || secondaryDept_id<=0) {
+                    dept_id = secondaryDeptList.get(0).getDept_id();
+                }else{
+                    dept_id=secondaryDept_id;
+                }
+                request.setAttribute("secondaryDeptList",secondaryDeptList);
+            }
         }
-        Map<String,Object> map = new HashMap<String, Object>();
+
         map.put("level",1);
-            request.setAttribute("contactslist",contactService.getContactsByDeptID(dept_id));
-            request.setAttribute("deptlist",departmentService.getDepartmentByMap(map));
-            return "WEB-INF/views/contactslist";
+        map.put("contacts",1);
+        request.setAttribute("company",departmentService.getDepartmentByDept_id(company_id));
+        request.setAttribute("contactsList",contactService.getContactsByDeptID(dept_id));
+        request.setAttribute("deptList",departmentService.getDepartmentByMap(map));
+        return "WEB-INF/views/contactslist";
+    }
+
+    @RequestMapping("/search")
+    public String search(@RequestParam("name") String name,HttpServletRequest request){
+        request.setAttribute("contactsList",contactService.getContactsByName('%'+name+'%'));
+        return "WEB-INF/views/contactslist";
     }
 }

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
-@Service("ContactServoce")
+@Service("ContactService")
 public class ContactServiceImpl implements ContactService {
 
     @Resource
@@ -16,8 +16,8 @@ public class ContactServiceImpl implements ContactService {
     public List<Contact> getContactsByDeptID(Integer dept_id){
         return contactDao.getContactsByDeptID(dept_id);
     }
-    public List<Contact> getContactsByID(Integer c_id){
-        return  contactDao.getContactsByID(c_id);
+    public List<Contact> getContactsByName(String name){
+        return  contactDao.getContactsByName(name);
     }
     public Integer addContact(Contact contact){
         return  contactDao.addContact(contact);
