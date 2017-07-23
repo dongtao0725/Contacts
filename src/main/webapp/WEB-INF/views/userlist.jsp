@@ -63,7 +63,7 @@
                 $("#modal-form").submit();
             })
 
-        })
+        });
 
         function delcfm(url) {
             $('#url').val(url);//给会话中的隐藏属性URL赋值

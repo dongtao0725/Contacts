@@ -61,6 +61,7 @@
         }
         .loginbtn:visited{
             text-decoration:none;
+            color: #fff;
         }
     </style>
     <script>
@@ -110,7 +111,7 @@
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input type="password" class="form-control" id="password" name="password" value="${user.password}" placeholder="Password">
+                    <input type="password" class="form-control" id="password" name="password" value="" placeholder="Password">
                 </div>
             </form>
         </div>
