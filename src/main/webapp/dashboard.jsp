@@ -14,13 +14,11 @@
     <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1' /><![endif]-->
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>省NOC信息管理平台</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/frame-content.css">
     <script src="${pageContext.request.contextPath}/js/jquery-3.2.1.min.js" ></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
     <style>
         body {
             font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -168,16 +166,12 @@
             var height = Math.max(bHeight, dHeight);
             iframe.height = height;
         };
-        //function onloadiframe(){
-        //    alert(this.Document.body.offsetHeight);
-        //    this.height(this.Document.body.scrollHeight+20);
-       // };
     </script>
 </head>
 <body>
 <div class="container">
     <div class="row">
-        <div class="col-xl-3" style="max-width:300px;">
+        <div class="col-xl-2" style="max-width:300px;">
             <nav style="margin-right: 40px; padding-top: 20px;">
                 <div class="login" style="padding-bottom: 20px;">
                     <img src="" width="50rem" height="50rem" style="float: left"/>
@@ -218,7 +212,7 @@
                 </div>
             </nav>
         </div>
-        <div class="col-xl-9">
+        <div class="col-xl-10">
             <div class="toplogin">
                 <c:choose>
                     <c:when test="${!empty currentUser }">

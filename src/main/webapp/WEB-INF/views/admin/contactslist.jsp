@@ -15,20 +15,16 @@
     <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1' /><![endif]-->
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>省NOC信息管理平台</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/frame-content.css">
     <script src="${pageContext.request.contextPath}/js/jquery-3.2.1.min.js" ></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
     <script>
         $(function () {
             $(".btn-add").click(function () {
                 $("#myModalLabel").html("添加用户");
                 $(".modal-btn-add").html("Add");
-                $("#dept_name").val(null);
                 $("#department").val(null);
                 $("#position").val(null);
                 $("#name").val(null);
@@ -36,51 +32,35 @@
                 $("#o_phone").val(null);
                 $("#network").val(null);
                 $("#enterprise").val(null);
-                $("#dept_id").val(null);
                 $("#c_id").val(null);
                 $(".form-group").removeClass("has-warning");
                 $('#myModal').modal({backdrop:false});
                 $('#myModal').modal('show');
             });
 
-            /*$(".modal-btn-add").click(function () {
-                id=$("#id").val();
-                username=$("#username").val();
-                password=$("#password").val();
-                role_id=$("#role_id").val();
-                if (username == null || username == "") {
-                    $("#username").parent(".form-group").addClass("has-warning");
-                    $("#username").addClass("form-control-warning");
+            $(".modal-btn-add").click(function () {
+                var id=$("#id").val();
+                var name=$("#name").val();
+
+                if (name == null || name == "") {
+                    $("#name").parent(".form-group").addClass("has-warning");
+                    $("#name").addClass("form-control-warning");
                     //alert("username can't be empty\uff01");
-                    return false;
-                }
-                if (id==null || id==""){
-                    if (password == null || password == "") {
-                        $("#password").parent(".form-group").addClass("has-warning");
-                        $("#password").addClass("form-control-warning");
-                        //alert("password can't be empty\uff01");
-                        return false;
-                    }
-                }
-                if(role_id==0){
-                    $("#role_id").parent(".form-group").addClass("has-warning");
-                    $("#role_id").addClass("form-control-warning");
                     return false;
                 }
                 $("#modal-form").submit();
             });
-*/
+
             $(".nav-link").click(function () {
                 $(".nav-link").removeClass("active");
                 $(this).addClass("active");
             });
 
-            $(".btn-operator").click(function () {
-                $contactroot = $(this).parentsUntil("tr");
+            $(".btn-modify").click(function () {
+                var $contactroot = $(this).parentsUntil("tr");
                 $("#myModalLabel").html("修改联系人信息");
                 $(".modal-btn-add").html("Update");
                 $(".form-group").removeClass("has-warning");
-                $("#dept_name").val($contactroot.siblings(".dept_name").html());
                 $("#department").val($contactroot.siblings(".department").html());
                 $("#position").val($contactroot.siblings(".position").html());
                 $("#name").val($contactroot.siblings(".name").html());
@@ -88,22 +68,21 @@
                 $("#o_phone").val($contactroot.siblings(".o_phone").html());
                 $("#network").val($contactroot.siblings(".network").html());
                 $("#enterprise").val($contactroot.siblings(".enterprise").html());
-                $("#dept_id").val($contactroot.siblings(".dept_id").html());
                 $("#c_id").val($contactroot.siblings(".c_id").html());
                 $('#myModal').modal({backdrop:false});
                 $('#myModal').modal('show');
-            })
-
-            $(".modal-btn-add").click(function() {
-                $("#modal-form").submit();
             });
-        });
 
-        function delcfm(url) {
-            $('#url').val(url);//给会话中的隐藏属性URL赋值
-            $('#delcfmModel').modal({backdrop:false});
-            $('#delcfmModel').modal("show");
-        }
+            $(".btn-del").click(function () {
+                var $contactroot = $(this).parentsUntil("tr");
+                var $url="${pageContext.request.contextPath}/contact/deleteContact?c_id="+$contactroot.siblings(".c_id").html();
+                $('#url').val($url);//给会话中的隐藏属性URL赋值
+                $('#delcfmModel').modal({backdrop:false});
+                $('#delcfmModel').modal("show");
+            });
+
+
+        });
 
         function urlSubmit(){
             var url=$.trim($("#url").val());//获取会话中的隐藏属性URL
@@ -155,14 +134,11 @@
             <c:forEach var="secondaryDept" items="#{secondaryDeptList}" varStatus="i">
                 <li class="nav-item">
                     <c:choose>
-                        <c:when test="${secondaryDept.dept_id==param.secondaryDept_id}">
-                            <a href="#" class="nav-link active">${secondaryDept.dept_name}</a>
-                        </c:when>
-                        <c:when test="${param.secondaryDept_id==null && i.count==1}">
+                        <c:when test="${secondaryDept.dept_name==realCompany.dept_name}">
                             <a href="#" class="nav-link active">${secondaryDept.dept_name}</a>
                         </c:when>
                         <c:otherwise>
-                            <a href="/contact/dept_id?dept_id=${company.dept_id}&secondaryDept_id=${secondaryDept.dept_id}" class="nav-link">${secondaryDept.dept_name}</a>
+                            <a href="${pageContext.request.contextPath}/contact/dept_id?dept_id=${company.dept_id}&secondaryDept_id=${secondaryDept.dept_id}" class="nav-link">${secondaryDept.dept_name}</a>
                         </c:otherwise>
                     </c:choose>
                 </li>
@@ -198,8 +174,8 @@
                     <td hidden class="c_id">${contact.c_id}</td>
                     <td>
                         <div class="btn-group" role="group">
-                            <button type="submit" class="btn btn-primary btn-sm btn-operator"><i class="fa fa-pencil"></i></button>
-                            <a onClick="delcfm('${pageContext.request.contextPath}/user/deleteuser?id=${user.id}')"><button type="button" class="btn btn-primary btn-sm btn-operator"><i class="fa fa-close "></i></button></a>
+                            <button type="submit" class="btn btn-primary btn-sm btn-operator btn-modify"><i class="fa fa-pencil"></i></button>
+                            <button type="button" class="btn btn-primary btn-sm btn-operator btn-del"><i class="fa fa-close "></i></button>
                         </div>
                     </td>
                 </tr>
@@ -222,37 +198,37 @@
             <form action="/contact/saveContact" id="modal-form">
                 <fieldset class="form-group">
                     <label for="dept_name">公司</label>
-                    <input type="text" name="dept.dept_name" class="form-control" id="dept_name">
+                    <input name="dept.dept_name" class="form-control" id="dept_name" value="${realCompany.dept_name}" disabled>
                 </fieldset>
                 <fieldset class="form-group">
-                    <label for="department">密码</label>
-                    <input type="text" name="department" class="form-control" id="department">
+                    <label for="department">部门</label>
+                    <input name="department" class="form-control" id="department">
                 </fieldset>
                 <fieldset class="form-group">
                     <label for="position">职位</label>
-                    <input type="text" name="position" class="form-control" id="position">
+                    <input name="position" class="form-control" id="position">
                 </fieldset>
                 <fieldset class="form-group">
                     <label for="name">姓名</label>
-                    <input type="text" name="name" class="form-control" id="name">
+                    <input name="name" class="form-control" id="name">
                 </fieldset>
                 <fieldset class="form-group">
                     <label for="c_phone">C网电话</label>
-                    <input type="text" name="c_phone" class="form-control" id="c_phone">
+                    <input name="c_phone" class="form-control" id="c_phone">
                 </fieldset>
                 <fieldset class="form-group">
                     <label for="o_phone">其他电话</label>
-                    <input type="text" name="o_phone" class="form-control" id="o_phone">
+                    <input name="o_phone" class="form-control" id="o_phone">
                 </fieldset>
                 <fieldset class="form-group">
                     <label for="network">网络备注</label>
-                    <input type="text" name="network" class="form-control" id="network">
+                    <input name="network" class="form-control" id="network">
                 </fieldset>
                 <fieldset class="form-group">
                     <label for="enterprise">政企备注</label>
-                    <input type="text" name="enterprise" class="form-control" id="enterprise">
+                    <input name="enterprise" class="form-control" id="enterprise">
                 </fieldset>
-                <input type="hidden" name="dept.dept_id" id="dept_id"/>
+                <input type="hidden" name="dept.dept_id" id="dept_id" value="${realCompany.dept_id}"/>
                 <input type="hidden" name="c_id" id="c_id"/>
             </form>
         </div>

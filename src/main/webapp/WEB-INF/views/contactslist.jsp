@@ -15,14 +15,11 @@
     <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1' /><![endif]-->
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>省NOC信息管理平台</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/frame-content.css">
     <script src="${pageContext.request.contextPath}/js/jquery-3.2.1.min.js" ></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
     <script>
         $(function () {
             $(".btn-add").click(function () {
@@ -138,10 +135,7 @@
         <c:forEach var="secondaryDept" items="#{secondaryDeptList}" varStatus="i">
         <li class="nav-item">
             <c:choose>
-                <c:when test="${secondaryDept.dept_id==param.secondaryDept_id}">
-                    <a href="#" class="nav-link active">${secondaryDept.dept_name}</a>
-                </c:when>
-                <c:when test="${param.secondaryDept_id==null && i.count==1}">
+                <c:when test="${secondaryDept.dept_name==realCompany.dept_name}">
                     <a href="#" class="nav-link active">${secondaryDept.dept_name}</a>
                 </c:when>
                 <c:otherwise>

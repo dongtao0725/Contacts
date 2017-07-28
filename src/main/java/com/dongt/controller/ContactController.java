@@ -49,6 +49,7 @@ public class ContactController {
         map.put("level",1);
         map.put("contacts",1);
         request.setAttribute("company",departmentService.getDepartmentByDept_id(company_id));
+        request.setAttribute("realCompany",departmentService.getDepartmentByDept_id(dept_id));
         request.setAttribute("contactsList",contactService.getContactsByDeptID(dept_id));
         request.setAttribute("deptList",departmentService.getDepartmentByMap(map));
         if(session.getAttribute("currentUser")==null ) {
@@ -70,6 +71,15 @@ public class ContactController {
             contactService.addContact(contact);
         }else{
             contactService.updateContact(contact);
+        }
+        String url = request.getHeader("Referer");
+        return "redirect:"+url;
+    }
+
+    @RequestMapping("/deleteContact")
+    public String deleteContact(Integer c_id,HttpServletRequest request){
+        if(c_id!=null && c_id>0) {
+            contactService.deleteContact(c_id);
         }
         String url = request.getHeader("Referer");
         return "redirect:"+url;

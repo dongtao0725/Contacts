@@ -17,7 +17,7 @@
     </resultMap>
 
     <select id="getContactsByDeptID" parameterType="Integer" resultMap="ContactResult">
-        SELECT c_id,department.dept_id,department.dept_name,department,position,name,c_phone,o_phone,network,enterprise FROM contacts,department where contacts.dept_id=department.dept_id and dept_id=#{dept_id} ORDER BY department
+        SELECT c_id,department.dept_id,department.dept_name,department,position,name,c_phone,o_phone,network,enterprise FROM contacts,department where contacts.dept_id=department.dept_id and dept_id=#{dept_id} ORDER BY enterprise DESC ,department ASC
     </select>
 
     <select id="getContactsByName" parameterType="String" resultMap="ContactResult">
