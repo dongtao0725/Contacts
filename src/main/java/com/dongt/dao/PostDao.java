@@ -11,10 +11,10 @@ import java.util.Map;
  */
 @Repository
 public interface PostDao {
-    public List<Post> getPost(Map<String, Object> map);
-    public Integer getCount(Map<String, Object> map);
-    public Integer addPost(Post post);
-    public Integer updatePost(Post post);
-    public Integer deletePost(Integer id);
-    public Post getPostById(Integer id);
+    List<Post> getPost(Map<String, Object> map);
+    Integer getCount(Map<String, Object> map);
+    Integer addPost(Post post);
+    Integer updatePost(Post post);
+    Integer deletePost(Integer id);
+    Post getPostById(Integer id);
 }

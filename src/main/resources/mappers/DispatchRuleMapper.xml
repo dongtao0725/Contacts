@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dongt.dao.DispatchRuleDao">
+    <resultMap id="DispatchRuleResult" type="DispatchRule">
+        <id property="r_id" column="r_id"/>
+        <result property="area" column="area"/>
+        <result property="department" column="department"/>
+        <result property="path" column="path"/>
+        <result property="responsibility" column="responsibility"/>
+        <result property="core_responsibility" column="core_responsibility"/>
+        <result property="remark" column="remark"/>
+        <association property="dept" javaType="Department">
+            <id property="dept_id" column="dept_id"/>
+            <result property="dept_name" column="dept_name"/>
+        </association>
+    </resultMap>
+
+    <select id="getDispatchRuleByDeptId" parameterType="Integer" resultMap="DispatchRuleResult">
+        SELECT * FROM dispatchrule,department WHERE dispatchrule.dept_id=department.dept_id AND dispatchrule.dept_id=#{dept_id}
+    </select>
+
+    <select id="getDispatchRuleByAreaOrDepartment" parameterType="String" resultMap="DispatchRuleResult">
+        SELECT * FROM dispatchrule,department WHERE dispatchrule.dept_id=department.dept_id
+        <if test="param!=null">
+            AND dispatchrule.area LIKE #{param} OR dispatchrule.department LIKE #{param}
+        </if>
+    </select>
+
+    <insert id="addDispatchRule" parameterType="DispatchRule" useGeneratedKeys="true" keyProperty="r_id">
+        INSERT INTO dispatchrule (dept_id,area,department,path,responsibility,core_responsibility,remark) VALUES (#{dept.dept_id},#{area},#{department},#{path},#{responsibility},#{core_responsibility},#{remark})
+    </insert>
+
+    <update id="updateDispatchRule" parameterType="DispatchRule">
+        UPDATE dispatchrule SET (dept_id,area,department,path,responsibility,core_responsibility,remark)=(#{dept.dept_id},#{area},#{department},#{path},#{responsibility},#{core_responsibility},#{remark}) WHERE r_id=#{r_id}
+    </update>
+
+    <delete id="deleteDispatchRule" parameterType="Integer">
+        DELETE FROM dispatchrule WHERE r_id=#{r_id}
+    </delete>
+</mapper>

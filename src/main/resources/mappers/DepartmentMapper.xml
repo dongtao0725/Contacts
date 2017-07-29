@@ -7,7 +7,7 @@
         <result property="dept_description" column="dept_description"/>
         <result property="parent_id" column="parent_id"/>
         <result property="contacts" column="contacts"/>
-        <result property="role" column="role"/>
+        <result property="rule" column="rule"/>
     </resultMap>
 
     <select id="getAllDepartment" resultMap="DepartmentResult">
@@ -42,14 +42,14 @@
             <if test="contacts==1">
             and contacts=1
             </if>
-            <if test="role==1 ">
-                and role=1
+            <if test="rule==1 ">
+                and rule=1
             </if>
     </select>
 
     <insert id="addDepartment"  useGeneratedKeys="true" keyProperty="id" parameterType="Department">
-        INSERT INTO Department (dept_name,dept_description,contacts,role,parent_id) VALUES (
-        #{dept_name},#{dept_description},#{contaces},#{role},#{parent_id})
+        INSERT INTO Department (dept_name,dept_description,contacts,rule,parent_id) VALUES (
+        #{dept_name},#{dept_description},#{contaces},#{rule},#{parent_id})
     </insert>
 
     <delete id="deleteDepartment" parameterType="Integer">
@@ -57,7 +57,7 @@
     </delete>
 
     <update id="updateDepartment" parameterType="Department">
-        UPDATE Department SET dept_name=#{dept_name},dept_description=#{dept_description},parent_id=#{parent_id},contacts=#{contacts},role=#{role}
+        UPDATE Department SET dept_name=#{dept_name},dept_description=#{dept_description},parent_id=#{parent_id},contacts=#{contacts},rule=#{rule}
         WHERE dept_id=#{dept_id}
     </update>
 </mapper>

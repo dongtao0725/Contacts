@@ -9,7 +9,7 @@ public class Department {
     private String dept_description;
     private Integer parent_id;
     private Integer contacts;
-    private Integer role;
+    private Integer rule;
 
     public Integer getDept_id() {
         return dept_id;
@@ -51,15 +51,15 @@ public class Department {
         this.contacts = contacts;
     }
 
-    public Integer getRole() {
-        return role;
+    public Integer getRule() {
+        return rule;
     }
 
-    public void setRole(Integer role) {
-        this.role = role;
+    public void setRule(Integer rule) {
+        this.rule = rule;
     }
 
     public String toString(){
-        return dept_id+dept_name+dept_description+parent_id+contacts+role;
+        return dept_id+dept_name+dept_description+parent_id+contacts+rule;
     }
 }

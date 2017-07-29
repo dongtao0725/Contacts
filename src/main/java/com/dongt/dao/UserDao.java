@@ -11,10 +11,10 @@ import java.util.Map;
  */
 @Repository
 public interface UserDao {
-    public User login(User user);
-    public List<User> findUsers(Map<String, Object> map);
-    public Integer getCount(Map<String, Object> map);
-    public Integer addUser(User user);
-    public Integer updateUser(User user);
-    public Integer deleteUser(Integer id);
+    User login(User user);
+    List<User> findUsers(Map<String, Object> map);
+    Integer getCount(Map<String, Object> map);
+    Integer addUser(User user);
+    Integer updateUser(User user);
+    Integer deleteUser(Integer id);
 }

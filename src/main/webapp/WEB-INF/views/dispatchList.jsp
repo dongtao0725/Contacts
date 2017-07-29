@@ -20,12 +20,23 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/frame-content.css">
     <script src="${pageContext.request.contextPath}/js/jquery-3.2.1.min.js" ></script>
     <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+    <style>
+        pre{
+            font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 0.9rem;
+            font-weight: 300;
+            line-height: 1.5;
+            color: #cfd2da;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+    </style>
 </head>
 <body>
 <div class="header">
     <div class="title">
         <h6 class="litle_title">Management</h6>
-        <h2 class="brx">通讯录</h2>
+        <h2 class="brx">派单规则</h2>
     </div>
     <div class="dept_list">
         <div class="dropdown open">
@@ -34,7 +45,7 @@
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenu1" style="">
                 <c:forEach var="dept" items="${deptList}"  varStatus="status">
-                    <a class="dropdown-item" style="float: left" href="${pageContext.request.contextPath}/contact/dept_id?dept_id=${dept.dept_id}">${dept.dept_name}</a>
+                    <a class="dropdown-item" style="float: left" href="${pageContext.request.contextPath}/dispatch/list?dept_id=${dept.dept_id}">${dept.dept_name}</a>
                     <c:if test="${status.count/5==0}">
                         <div class="clearfix"></div>
                     </c:if>
@@ -46,7 +57,7 @@
 </div>
 <div class="tools">
     <div style="width: 99%;display: table-cell;">
-        <form class="search" style="display: inline-block;margin-bottom: 0px;" action="${pageContext.request.contextPath}/contact/search">
+        <form class="search" style="display: inline-block;margin-bottom: 0px;" action="${pageContext.request.contextPath}/dispatch/search">
             <input class="form-control" type="text" name="name" placeholder="Search Name...">
             <button type="submit" class="po">
                 <i class="fa fa-search" aria-hidden="true"></i>
@@ -64,7 +75,7 @@
                     <a href="#" class="nav-link active">${secondaryDept.dept_name}</a>
                 </c:when>
                 <c:otherwise>
-                    <a href="${pageContext.request.contextPath}/contact/dept_id?dept_id=${company.dept_id}&secondaryDept_id=${secondaryDept.dept_id}" class="nav-link">${secondaryDept.dept_name}</a>
+                    <a href="${pageContext.request.contextPath}/dispatch/list?dept_id=${company.dept_id}&secondaryDept_id=${secondaryDept.dept_id}" class="nav-link">${secondaryDept.dept_name}</a>
                 </c:otherwise>
             </c:choose>
         </li>
@@ -74,27 +85,25 @@
     <table class="table contentlist table-hover">
         <thead>
         <tr>
-            <th class="header" style="min-width: 65px">公司</th>
-            <th class="header" style="min-width: 150px">部门</th>
-            <th class="header" style="min-width: 170px">职位</th>
-            <th class="header" style="min-width: 80px">姓名</th>
-            <th class="header" style="width: 110px">C网电话</th>
-            <th class="header" style="width: 110px">其他电话</th>
-            <th class="header"style="min-width: 180px">网络备注</th>
-            <th class="header" style="min-width: 180px">政企备注</th>
+            <th class="header" style="width: 10%">公司</th>
+            <th class="header" style="width: 10%">区域</th>
+            <th class="header" style="width:10%;">部门</th>
+            <th class="header" style="width: 15%">路径</th>
+            <th class="header" style="width: 20%">维护职责</th>
+            <th class="header" style="width: 20%">省核心设备维护职责</th>
+            <th class="header"style="width: 10%">备注</th>
         </tr>
         </thead>
         <tbody>
-        <c:forEach var="contact" items="${contactsList}" varStatus="status">
+        <c:forEach var="dispatchRule" items="${dispatchRuleList}" varStatus="status">
             <tr>
-                <td>${contact.dept.dept_name}</td>
-                <td>${contact.department}</td>
-                <td>${contact.position}</td>
-                <td>${contact.name}</td>
-                <td>${contact.c_phone}</td>
-                <td>${contact.o_phone}</td>
-                <td>${contact.network}</td>
-                <td>${contact.enterprise}</td>
+                <td>${dispatchRule.dept.dept_name}</td>
+                <td>${dispatchRule.area}</td>
+                <td>${dispatchRule.department}</td>
+                <td>${dispatchRule.path}</td>
+                <td><pre>${dispatchRule.responsibility}</pre></td>
+                <td><pre>${dispatchRule.core_responsibility}</pre></td>
+                <td><pre>${dispatchRule.remark}</pre></td>
         </tr>
     </c:forEach>
 

@@ -10,9 +10,9 @@ import java.util.List;
  */
 @Repository
 public interface M_RoleDao {
-    public List<Management_Role> getAllM_Role();
-    public Management_Role getM_RoleById(Integer id);
-    //public Integer addM_Role(Management_Role role);
-    //public Integer updateM_Role(Management_Role role);
-    //public Integer deleteM_Role(Integer id);
+    List<Management_Role> getAllM_Role();
+    Management_Role getM_RoleById(Integer id);
+    //Integer addM_Role(Management_Role role);
+    //Integer updateM_Role(Management_Role role);
+    //Integer deleteM_Role(Integer id);
 }

@@ -191,7 +191,7 @@
                             <a class="qn active" href="${pageContext.request.contextPath}/contact/dept_id" target="frame-content"><i class="fa fa-address-book fa-lg" aria-hidden="true"></i>通讯录</a>
                         </li>
                         <li class="qp">
-                            <a class="qn" href="#"><i class="fa fa-share-square-o fa-lg" aria-hidden="true"></i>派单规则</a>
+                            <a class="qn" href="${pageContext.request.contextPath}/dispatch/list" target="frame-content"><i class="fa fa-share-square-o fa-lg" aria-hidden="true"></i>派单规则</a>
                         </li>
                         <li class="qp">
                             <a class="qn " href="#"><i class="fa fa-key fa-lg" aria-hidden="true"></i> 密码表</a>
