@@ -82,14 +82,20 @@
         </c:forEach>
     </ul>
     </c:if>
+    <div>
+        <h4>派单原则</h4>
+        <div>
+            <pre>${dispatchPrinciple.principle}</pre>
+        </div>
+    </div>
     <table class="table contentlist table-hover">
         <thead>
         <tr>
-            <th class="header" style="width: 10%">公司</th>
+            <th class="header" style="width: 5%">公司</th>
             <th class="header" style="width: 10%">区域</th>
             <th class="header" style="width:10%;">部门</th>
             <th class="header" style="width: 15%">路径</th>
-            <th class="header" style="width: 20%">维护职责</th>
+            <th class="header" style="width: 25%">维护职责</th>
             <th class="header" style="width: 20%">省核心设备维护职责</th>
             <th class="header"style="width: 10%">备注</th>
         </tr>

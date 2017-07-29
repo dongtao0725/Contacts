@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dongt.dao.DispatchPrincipleDao">
+    <resultMap id="DispatchPrincipleResult" type="DispatchPrinciple">
+        <id property="p_id" column="p_id"/>
+        <result property="principle" column="principle"/>
+        <association property="dept" javaType="Department">
+            <id property="dept_id" column="dept_id"/>
+            <result property="dept_name" column="dept_name"/>
+        </association>
+    </resultMap>
+
+    <select id="getDispatchPrincipleByDeptID" parameterType="Integer" resultMap="DispatchPrincipleResult">
+        SELECT  dispatchprinciple.*,department.dept_name FROM  dispatchprinciple,department WHERE dispatchprinciple.dept_id=department.dept_id AND dispatchprinciple.dept_id=#{dept_id}
+    </select>
+
+    <insert id="addDispatchPrinciple" parameterType="DispatchPrinciple" useGeneratedKeys="true" keyProperty="p_id">
+        INSERT INTO dispatchprinciple (dept_id,principle) VALUES (#{dept.dept_id},#{principle})
+    </insert>
+
+    <update id="updateDispatchPrinciple" parameterType="DispatchPrinciple">
+        UPDATE dispatchprinciple SET (dept_id,principle) = (#{dept.dept_id},#{principle}) WHERE p_id=#{p_id}
+    </update>
+
+    <delete id="deleteDispatchPrinciple" parameterType="Integer">
+        DELETE FROM dispatchprinciple WHERE p_id=#{p_id}
+    </delete>
+</mapper>

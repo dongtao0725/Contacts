@@ -1,7 +1,9 @@
 package com.dongt.controller;
 
 import com.dongt.domain.Department;
+import com.dongt.domain.DispatchPrinciple;
 import com.dongt.service.DepartmentService;
+import com.dongt.service.DispatchPrincipleService;
 import com.dongt.service.DispatchRuleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +20,8 @@ import java.util.Map;
 public class DispatchController {
     @Autowired
     private DispatchRuleService dispatchRuleService;
+    @Autowired
+    private DispatchPrincipleService dispatchPrincipleService;
     @Autowired
     private DepartmentService departmentService;
 
@@ -49,6 +53,7 @@ public class DispatchController {
         map.put("rule",1);
         request.setAttribute("company",departmentService.getDepartmentByDept_id(company_id));
         request.setAttribute("realCompany",departmentService.getDepartmentByDept_id(dept_id));
+        request.setAttribute("dispatchPrinciple",dispatchPrincipleService.getDispatchPrincipleByDeptID(dept_id));
         request.setAttribute("dispatchRuleList",dispatchRuleService.getDispatchRuleByDeptId(dept_id));
         request.setAttribute("deptList",departmentService.getDepartmentByMap(map));
         request.setAttribute("dispatchRuleList",dispatchRuleService.getDispatchRuleByDeptId(dept_id));
