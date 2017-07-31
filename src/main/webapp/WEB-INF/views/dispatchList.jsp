@@ -5,7 +5,7 @@
   Time: 19:55
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fun" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
@@ -29,6 +29,10 @@
             color: #cfd2da;
             white-space: pre-wrap;
             word-wrap: break-word;
+        }
+        .jumbotron{
+            padding: 2rem 1rem;
+            background-color:#434857;
         }
     </style>
 </head>
@@ -58,7 +62,7 @@
 <div class="tools">
     <div style="width: 99%;display: table-cell;">
         <form class="search" style="display: inline-block;margin-bottom: 0px;" action="${pageContext.request.contextPath}/dispatch/search">
-            <input class="form-control" type="text" name="name" placeholder="Search Name...">
+            <input class="form-control" name="param" placeholder="Search Place...">
             <button type="submit" class="po">
                 <i class="fa fa-search" aria-hidden="true"></i>
             </button>
@@ -82,12 +86,14 @@
         </c:forEach>
     </ul>
     </c:if>
-    <div>
-        <h4>派单原则</h4>
-        <div>
-            <pre>${dispatchPrinciple.principle}</pre>
+    <c:if test="${dispatchPrinciple!=null}">
+        <div class="jumbotron">
+            <h4>派单原则</h4>
+            <p>
+                <pre>${dispatchPrinciple.principle}</pre>
+            </p>
         </div>
-    </div>
+    </c:if>
     <table class="table contentlist table-hover">
         <thead>
         <tr>

@@ -2,12 +2,14 @@ package com.dongt.controller;
 
 import com.dongt.domain.Department;
 import com.dongt.domain.DispatchPrinciple;
+import com.dongt.domain.DispatchRule;
 import com.dongt.service.DepartmentService;
 import com.dongt.service.DispatchPrincipleService;
 import com.dongt.service.DispatchRuleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -62,5 +64,42 @@ public class DispatchController {
         }else{
             return "WEB-INF/views/admin/dispatchList";
         }
+    }
+
+    @RequestMapping("/search")
+    public String search(@RequestParam("param") String param, HttpServletRequest request){
+        request.setAttribute("dispatchRuleList",dispatchRuleService.getDispatchRuleByAreaOrDepartment('%'+param+'%'));
+        return "WEB-INF/views/dispatchList";
+    }
+
+    @RequestMapping("/saveDispatchPrinciple")
+    public String saveDispatchPrinciple(DispatchPrinciple dispatchPrinciple,HttpServletRequest request){
+        if(dispatchPrinciple.getP_id()==null){
+            dispatchPrincipleService.addDispatchPrinciple(dispatchPrinciple);
+        }else {
+            dispatchPrincipleService.updateDispatchPrinciple(dispatchPrinciple);
+        }
+        String url = request.getHeader("Referer");
+        return "redirect:"+url;
+    }
+
+    @RequestMapping("/saveDispatchRule")
+    public String saveDispatchPrinciple(DispatchRule dispatchRule, HttpServletRequest request){
+        if(dispatchRule.getR_id()==null){
+            dispatchRuleService.addDispatchRule(dispatchRule);
+        }else {
+            dispatchRuleService.updateDispatchRule(dispatchRule);
+        }
+        String url = request.getHeader("Referer");
+        return "redirect:"+url;
+    }
+
+    @RequestMapping("/deleteDispatchRule")
+    public String deleteDispatchRule(Integer r_id,HttpServletRequest request){
+        if(r_id!=null && r_id>0) {
+            dispatchRuleService.deleteDispatchRule(r_id);
+        }
+        String url = request.getHeader("Referer");
+        return "redirect:"+url;
     }
 }

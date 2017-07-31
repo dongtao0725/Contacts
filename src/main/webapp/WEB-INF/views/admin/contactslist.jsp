@@ -5,7 +5,7 @@
   Time: 19:55
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fun" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
@@ -58,6 +58,7 @@
 
             $(".btn-modify").click(function () {
                 var $contactroot = $(this).parentsUntil("tr");
+                $("body,html",parent.document).animate({scrollTop:0},500);
                 $("#myModalLabel").html("修改联系人信息");
                 $(".modal-btn-add").html("Update");
                 $(".form-group").removeClass("has-warning");
@@ -74,6 +75,7 @@
             });
 
             $(".btn-del").click(function () {
+                $("body,html",parent.document).animate({scrollTop:0},500);
                 var $contactroot = $(this).parentsUntil("tr");
                 var $url="${pageContext.request.contextPath}/contact/deleteContact?c_id="+$contactroot.siblings(".c_id").html();
                 $('#url').val($url);//给会话中的隐藏属性URL赋值
@@ -195,7 +197,7 @@
             </button>
         </div>
         <div class="modal-body" >
-            <form action="/contact/saveContact" id="modal-form">
+            <form action="${pageContext.request.contextPath}/contact/saveContact" id="modal-form">
                 <fieldset class="form-group">
                     <label for="dept_name">公司</label>
                     <input name="dept.dept_name" class="form-control" id="dept_name" value="${realCompany.dept_name}" disabled>
